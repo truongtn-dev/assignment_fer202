@@ -1,0 +1,573 @@
+{
+  "users": [
+    {
+      "name": "Truong Devs",
+      "email": "admin@example.com",
+      "password": "Admin123@",
+      "phone": "0973898830",
+      "role": "admin",
+      "status": "active",
+      "id": "1"
+    },
+    {
+      "name": "Truong Devs",
+      "email": "user@example.com",
+      "password": "User123@",
+      "phone": "0973898830",
+      "role": "user",
+      "status": "active",
+      "id": "2"
+    },
+    {
+      "name": "Han Trinh",
+      "email": "han@gmail.com",
+      "password": "Han123@",
+      "phone": "0979803939",
+      "role": "user",
+      "status": "active",
+      "id": 3
+    }
+  ],
+  "calendar": [],
+  "modules": [
+    {
+      "id": "1",
+      "icon": "BookOpen",
+      "title": "Fundamentals Mastery",
+      "description": "Build strong foundation with core concepts and principles",
+      "gradient": "from-blue-500 to-blue-600"
+    },
+    {
+      "id": "2",
+      "icon": "Code",
+      "title": "Real-world Project Building",
+      "description": "Apply knowledge through hands-on industry-relevant projects",
+      "gradient": "from-green-500 to-green-600"
+    },
+    {
+      "id": "3",
+      "icon": "Users",
+      "title": "Personalized Doubt Solving",
+      "description": "Get instant clarification on complex topics from experts",
+      "gradient": "from-purple-500 to-purple-600"
+    },
+    {
+      "id": "4",
+      "icon": "CheckCircle",
+      "title": "Weekly Assignments",
+      "description": "Reinforce learning with carefully crafted practice problems",
+      "gradient": "from-orange-500 to-orange-600"
+    },
+    {
+      "id": "5",
+      "icon": "Target",
+      "title": "Exam & Interview Preparation",
+      "description": "Master test-taking strategies and interview techniques",
+      "gradient": "from-red-500 to-red-600"
+    },
+    {
+      "id": "6",
+      "icon": "BarChart3",
+      "title": "Feedback Loops and Revisions",
+      "description": "Continuous improvement through detailed progress analysis",
+      "gradient": "from-teal-500 to-teal-600"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "1",
+      "name": "Sophia L.",
+      "title": "UX Designer",
+      "content": "This platform completely changed the way I learn. The 1-on-1 mentorship helped me land my dream job in just 3 months!",
+      "avatar": "https://i.pravatar.cc/150?img=11"
+    },
+    {
+      "id": "2",
+      "name": "Rahul K.",
+      "title": "Software Developer",
+      "content": "The personalized curriculum and progress tracking made a huge difference. I finally understood concepts I struggled with for years.",
+      "avatar": "https://i.pravatar.cc/150?img=22"
+    },
+    {
+      "id": "3",
+      "name": "Emily R.",
+      "title": "Data Analyst",
+      "content": "Thanks to the live classes and support, I cleared my interviews and transitioned careers smoothly.",
+      "avatar": "https://i.pravatar.cc/150?img=33"
+    }
+  ],
+  "pricingPlans": [
+    {
+      "id": "1",
+      "name": "3 Months Plan",
+      "icon": "Zap",
+      "price": "$49",
+      "period": "per month",
+      "originalPrice": "$59",
+      "description": "Perfect for getting started with personalized learning",
+      "features": [
+        "8 hours of 1-on-1 sessions per month",
+        "24/7 AI doubt support",
+        "Session recordings access",
+        "Weekly progress reports",
+        "Basic project assignments",
+        "Email support"
+      ],
+      "notIncluded": [
+        "Priority mentor selection",
+        "Interview preparation",
+        "Certificate of completion"
+      ],
+      "buttonText": "Start Learning",
+      "popular": false,
+      "gradient": "from-blue-500 to-blue-600"
+    },
+    {
+      "id": "2",
+      "name": "6 Months Plan",
+      "icon": "Star",
+      "price": "$39",
+      "period": "per month",
+      "originalPrice": "$59",
+      "description": "Most popular choice for comprehensive skill development",
+      "features": [
+        "12 hours of 1-on-1 sessions per month",
+        "24/7 AI doubt support",
+        "Session recordings access",
+        "Weekly progress reports",
+        "Advanced project assignments",
+        "Priority mentor selection",
+        "Interview preparation sessions",
+        "Certificate of completion",
+        "Priority support"
+      ],
+      "notIncluded": [],
+      "buttonText": "Most Popular",
+      "popular": true,
+      "gradient": "from-green-500 to-green-600"
+    },
+    {
+      "id": "3",
+      "name": "12 Months Plan",
+      "icon": "Crown",
+      "price": "$29",
+      "period": "per month",
+      "originalPrice": "$59",
+      "description": "Complete mastery program with maximum value",
+      "features": [
+        "16 hours of 1-on-1 sessions per month",
+        "24/7 AI doubt support",
+        "Session recordings access",
+        "Weekly progress reports",
+        "Industry-level project portfolio",
+        "Priority mentor selection",
+        "Interview preparation + mock interviews",
+        "Certificate of completion",
+        "Job placement assistance",
+        "Lifetime access to recordings",
+        "1-on-1 career counseling",
+        "24/7 priority support"
+      ],
+      "notIncluded": [],
+      "buttonText": "Best Value",
+      "popular": false,
+      "gradient": "from-purple-500 to-purple-600"
+    }
+  ],
+  "stats": {
+    "students": "10K+",
+    "rating": "4.9",
+    "mentors": "500+"
+  },
+  "usps": [
+    {
+      "id": "1",
+      "icon": "Users",
+      "title": "1-on-1 Live Sessions",
+      "description": "Personal attention with dedicated mentors for maximum learning efficiency",
+      "color": "blue"
+    },
+    {
+      "id": "2",
+      "icon": "Bot",
+      "title": "24/7 AI Doubt Support",
+      "description": "Instant AI-powered assistance whenever you need help or clarification",
+      "color": "green"
+    },
+    {
+      "id": "3",
+      "icon": "Target",
+      "title": "Personalized Learning Path",
+      "description": "Customized curriculum based on your goals, pace, and learning style",
+      "color": "purple"
+    },
+    {
+      "id": "4",
+      "icon": "BarChart3",
+      "title": "Weekly Progress Reports",
+      "description": "Detailed analytics and insights to track your learning journey",
+      "color": "orange"
+    },
+    {
+      "id": "5",
+      "icon": "Video",
+      "title": "Session Recordings",
+      "description": "Access to all your class recordings for revision and practice",
+      "color": "teal"
+    },
+    {
+      "id": "6",
+      "icon": "Wrench",
+      "title": "Industry-Relevant Tools",
+      "description": "Learn with the latest tools and technologies used in the industry",
+      "color": "red"
+    }
+  ],
+  "howSteps": [
+    {
+      "id": "1",
+      "icon": "Calendar",
+      "title": "Book a Free Trial",
+      "description": "Schedule your first session and experience our teaching methodology firsthand",
+      "color": "blue"
+    },
+    {
+      "id": "2",
+      "icon": "UserCheck",
+      "title": "Choose Your Mentor",
+      "description": "Get matched with an expert mentor who aligns with your learning goals",
+      "color": "green"
+    },
+    {
+      "id": "3",
+      "icon": "Video",
+      "title": "Attend 1-on-1 Live Classes",
+      "description": "Engage in interactive sessions tailored to your pace and learning style",
+      "color": "purple"
+    },
+    {
+      "id": "4",
+      "icon": "Bot",
+      "title": "Get AI Support + Recordings",
+      "description": "Access 24/7 AI assistance and review session recordings anytime",
+      "color": "orange"
+    },
+    {
+      "id": "5",
+      "icon": "BarChart3",
+      "title": "Track Weekly Progress",
+      "description": "Monitor your improvement with detailed analytics and personalized feedback",
+      "color": "teal"
+    }
+  ],
+  "navItems": [
+    {
+      "id": "home",
+      "label": "Home",
+      "href": "#home"
+    },
+    {
+      "id": "curriculum",
+      "label": "Curriculum",
+      "href": "#curriculum"
+    },
+    {
+      "id": "uspsection",
+      "label": "Why Choose Us",
+      "href": "#uspsection"
+    },
+    {
+      "id": "how-it-works",
+      "label": "How It Works",
+      "href": "#how-it-works"
+    },
+    {
+      "id": "testimonials",
+      "label": "Testimonials",
+      "href": "#testimonials"
+    },
+    {
+      "id": "courses",
+      "label": "Courses",
+      "href": "#courses"
+    },
+    {
+      "id": "pricing",
+      "label": "Pricing",
+      "href": "#pricing"
+    }
+  ],
+  "formSubmissions": [
+    {
+      "id": 1,
+      "name": "Truong Devs",
+      "email": "truongtn.dev@gmail.com",
+      "subject": "Digital Marketing",
+      "timeSlot": "10:00 AM - 11:00 AM",
+      "phone": "0973898830",
+      "message": "Test function",
+      "type": "trial",
+      "submittedAt": "2025-07-23T11:55:04.909Z"
+    }
+  ],
+  "subjects": [
+    {
+      "id": "1",
+      "title": "Program Backend NodeJS Middle 2026",
+      "lessons": 60,
+      "students": 30,
+      "startDate": "10/08/2025",
+      "schedule": "Sunday",
+      "time": "19h–23h",
+      "team": "Edtech Team",
+      "price": 11200000,
+      "oldPrice": 22500000,
+      "image": "backend-nodejs.jpg",
+      "discount": "-50%",
+      "badge": "Discount -50%",
+      "rating": 4.7,
+      "reviews": 3
+    },
+    {
+      "id": "2",
+      "title": "Databases and SQL for Beginners",
+      "lessons": 24,
+      "students": 0,
+      "startDate": "21/07/2025",
+      "schedule": "Monday, Thursday, Saturday",
+      "time": "21h–23h",
+      "team": "Edtech Team",
+      "price": 2400000,
+      "oldPrice": 6000000,
+      "image": "database-sql.jpg",
+      "discount": "-60%",
+      "badge": "Discount -60%",
+      "rating": 3,
+      "reviews": 2
+    },
+    {
+      "id": "3",
+      "title": "Program Fullstack 2025",
+      "lessons": 95,
+      "students": 32,
+      "startDate": "26/06/2025",
+      "schedule": "Tuesday, Thursday, Saturday",
+      "time": "19h–21h",
+      "team": "Edtech Team",
+      "price": 12800000,
+      "oldPrice": 25000000,
+      "image": "fullstack-nodejs.jpg",
+      "discount": "-49%",
+      "badge": "Discount -49%",
+      "rating": 4.8,
+      "reviews": 280
+    },
+    {
+      "id": "4",
+      "title": "C++ From Basic To Advanced",
+      "lessons": 0,
+      "students": 0,
+      "startDate": "05/08/2025",
+      "schedule": "Monday, Wednesday",
+      "time": "19h–21h",
+      "team": "Edtech Team",
+      "price": 3400000,
+      "oldPrice": 6000000,
+      "image": "cpp-basic-advanced.jpg",
+      "discount": "-43%",
+      "badge": "Discount -43%",
+      "rating": 5,
+      "reviews": 9
+    },
+    {
+      "id": "5",
+      "title": "C++ Advanced",
+      "lessons": 0,
+      "students": 0,
+      "startDate": "12/08/2025",
+      "schedule": "Tuesday, Thursday",
+      "time": "19h–21h",
+      "team": "Edtech Team",
+      "price": 3700000,
+      "oldPrice": 6500000,
+      "image": "cpp-advanced.jpg",
+      "discount": "-43%",
+      "badge": "Discount -43%"
+    },
+    {
+      "id": "6",
+      "title": "Data Structures and Algorithms",
+      "lessons": 0,
+      "students": 0,
+      "startDate": "20/08/2025",
+      "schedule": "Tuesday, Thursday, Saturday",
+      "time": "20h–22h",
+      "team": "Edtech Team",
+      "price": 4200000,
+      "oldPrice": 8500000,
+      "image": "data-structure.jpg",
+      "discount": "-50%",
+      "badge": "Discount -50%"
+    },
+    {
+      "id": "7",
+      "title": "Basic Python Programming",
+      "lessons": 30,
+      "students": 25,
+      "startDate": "18/07/2025",
+      "schedule": "Monday, Wednesday",
+      "time": "19h–21h",
+      "team": "Edtech Team",
+      "price": 2500000,
+      "oldPrice": 5000000,
+      "image": "python-basic.jpg",
+      "discount": "-50%",
+      "badge": "Discount -50%",
+      "rating": 0,
+      "reviews": 0
+    },
+    {
+      "id": "8",
+      "title": "Web Frontend with HTML/CSS/JS",
+      "lessons": 40,
+      "students": 28,
+      "startDate": "15/08/2025",
+      "schedule": "Tuesday, Thursday, Saturday",
+      "time": "18h–20h",
+      "team": "Edtech Team",
+      "price": 2800000,
+      "oldPrice": 5600000,
+      "image": "frontend-course.jpg",
+      "discount": "-50%",
+      "badge": "Discount -50%",
+      "rating": 3,
+      "reviews": 20
+    },
+    {
+      "id": 9,
+      "title": "Databases and SQL for Beginners",
+      "lessons": 78,
+      "students": 30,
+      "startDate": "10/08/2025",
+      "schedule": "Sunday",
+      "time": "19h–23h",
+      "team": "Edtech Team",
+      "price": 33090000,
+      "oldPrice": 45000000,
+      "image": "backend-nodejs.jpg",
+      "discount": "-60%",
+      "badge": "Discount -60%",
+      "rating": 5,
+      "reviews": 1
+    }
+  ],
+  "reviews": [
+    {
+      "id": 2,
+      "subjectId": "1",
+      "name": "vrhfjedk",
+      "comment": "fhjkld hay",
+      "rating": 5,
+      "createdAt": "2025-07-23T13:41:45.217Z"
+    },
+    {
+      "name": "jhg",
+      "comment": "hdf",
+      "rating": 1,
+      "subjectId": "2",
+      "createdAt": "2025-07-23T12:52:50.513Z",
+      "id": 3
+    },
+    {
+      "name": "jthh",
+      "comment": "hjhh",
+      "rating": 5,
+      "subjectId": "2",
+      "createdAt": "2025-07-23T13:03:39.709Z",
+      "id": 4
+    },
+    {
+      "name": "oktj",
+      "comment": "jjjujjj",
+      "rating": 4,
+      "subjectId": "1",
+      "createdAt": "2025-07-23T13:28:19.216Z",
+      "id": 5
+    },
+    {
+      "name": "ụuytj",
+      "comment": "yujkyjk",
+      "rating": 5,
+      "subjectId": "1",
+      "createdAt": "2025-07-23T13:28:58.500Z",
+      "id": 6
+    },
+    {
+      "name": "John",
+      "comment": "Hay dữ dằn luôn",
+      "rating": 5,
+      "subjectId": 9,
+      "createdAt": "2025-07-23T13:48:47.095Z",
+      "id": 7
+    },
+    {
+      "name": "Myyyy",
+      "comment": "Tuyệt lắm",
+      "rating": 5,
+      "subjectId": 9,
+      "createdAt": "2025-07-23T13:49:05.559Z",
+      "id": 8
+    }
+  ],
+  "enrollments": [
+    {
+      "userId": "2",
+      "subjectId": "1",
+      "price": 11200000,
+      "date": "2025-07-23",
+      "id": 1
+    },
+    {
+      "userId": "2",
+      "subjectId": "1",
+      "price": 11200000,
+      "date": "2025-07-23",
+      "id": 2
+    },
+    {
+      "userId": "2",
+      "subjectId": "2",
+      "price": 2400000,
+      "date": "2025-07-23",
+      "id": 3
+    },
+    {
+      "userId": "2",
+      "subjectId": "3",
+      "price": 12800000,
+      "date": "2025-07-23",
+      "id": 4
+    },
+    {
+      "userId": "2",
+      "subjectId": "5",
+      "price": 3700000,
+      "date": "2025-07-23",
+      "id": 5
+    },
+    {
+      "userId": "2",
+      "subjectId": "4",
+      "price": 3400000,
+      "date": "2025-07-23",
+      "id": 6
+    },
+    {
+      "userId": "2",
+      "subjectId": "3",
+      "price": 12800000,
+      "date": "2025-07-23",
+      "id": 7
+    }
+  ]
+}
