@@ -36,12 +36,28 @@ const Navbar = ({ user, onLogout }) => {
   }, [navItems]);
 
   const scrollToSection = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      const offsetTop =
-        element.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top: offsetTop, behavior: "smooth" });
+    const path = window.location.pathname;
+
+    if (path !== "/") {
+      navigate("/", { replace: false });
+
+      setTimeout(() => {
+        const element = document.querySelector(href);
+        if (element) {
+          const offsetTop =
+            element.getBoundingClientRect().top + window.pageYOffset - 80;
+          window.scrollTo({ top: offsetTop, behavior: "smooth" });
+        }
+      }, 300);
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        const offsetTop =
+          element.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: offsetTop, behavior: "smooth" });
+      }
     }
+
     setIsMenuOpen(false);
   };
 
@@ -92,7 +108,6 @@ const Navbar = ({ user, onLogout }) => {
             ))}
           </div>
 
-          {/* Right buttons (Desktop) */}
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
               <>
@@ -135,7 +150,6 @@ const Navbar = ({ user, onLogout }) => {
             )}
           </div>
 
-          {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="lg:hidden w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-lg flex items-center justify-center transition-colors duration-200"

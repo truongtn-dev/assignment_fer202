@@ -7,7 +7,6 @@ server.use(middlewares);
 
 server.use(jsonServer.bodyParser);
 
-// Định nghĩa endpoint login
 server.post("/login", (req, res) => {
   const { email, password } = req.body;
   const user = router.db.get("users").find({ email, password }).value();

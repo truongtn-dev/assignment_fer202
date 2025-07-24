@@ -20,11 +20,13 @@ import Login from "./components/Login";
 import AdminCalendar from "./components/AdminCalendar";
 import AdminReviews from "./components/AdminReviews";
 import MyCourses from "./components/MyCourses";
+import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
   const [isTrialOpen, setIsTrialOpen] = useState(false);
   const [isCounsellorOpen, setIsCounsellorOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [showIntro, setShowIntro] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -33,6 +35,13 @@ function App() {
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) setUser(JSON.parse(storedUser));
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowIntro(false);
+    }, 3000);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleLogout = () => {
@@ -70,6 +79,41 @@ function App() {
       </div>
     );
   };
+
+  if (showIntro) {
+    return (
+      <div className="fixed inset-0 z-[9999] bg-white flex items-center justify-center animate-fade-in">
+        <div className="relative flex flex-col items-center justify-center text-center px-6 py-12 space-y-6">
+          <div className="absolute w-64 h-64 bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 rounded-full blur-[100px] opacity-30 animate-pulse" />
+
+          <div className="z-10 w-20 h-20 bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center rounded-full shadow-xl animate-bounce-slow">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-10 h-10 text-white"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              viewBox="0 0 24 24"
+            >
+              <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path>
+              <path d="M22 10v6"></path>
+              <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path>
+            </svg>
+          </div>
+
+          <h1 className="z-10 text-2xl md:text-4xl font-bold text-gray-900 tracking-tight animate-fade-in-slow delay-200">
+            Welcome to <span className="text-blue-600">Group 5</span>'s Space
+          </h1>
+
+          <p className="z-10 text-gray-500 text-base md:text-lg animate-fade-in-slow delay-400">
+            Initializing your experience...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -125,6 +169,7 @@ function App() {
         />
 
         <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
 
         <Route
           path="/admin/dashboard"
@@ -176,6 +221,7 @@ function App() {
         />
         <Route path="/my-courses" element={<MyCourses />} />
       </Routes>
+
       <Footer />
 
       <ModalForm

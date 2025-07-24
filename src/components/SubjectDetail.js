@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import ReviewSection from "./ReviewSection";
 import LessonList from "./LessonList";
+import PaymentModal from "./PaymentModal";
 
 const SubjectDetail = ({ onOpenTrialModal, onOpenCounsellorModal }) => {
   const { id } = useParams();
@@ -15,6 +16,7 @@ const SubjectDetail = ({ onOpenTrialModal, onOpenCounsellorModal }) => {
   const [subject, setSubject] = useState(null);
   const [relatedSubjects, setRelatedSubjects] = useState([]);
   const [hasEnrolled, setHasEnrolled] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
 
   useEffect(() => {
     axios
@@ -45,30 +47,14 @@ const SubjectDetail = ({ onOpenTrialModal, onOpenCounsellorModal }) => {
     }
   }, [subject]);
 
-  const handleEnroll = async () => {
+  const handleEnroll = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user || user.role !== "user") {
       toast.error("Please log in with a student account to enroll.");
       return;
     }
 
-    const newEnrollment = {
-      userId: user.id,
-      subjectId: subject.id,
-      price: subject.price,
-      date: new Date().toISOString().slice(0, 10),
-      progress: 0,
-      completedLessons: [],
-    };
-
-    try {
-      await axios.post("http://localhost:5000/enrollments", newEnrollment);
-      toast.success("Successfully enrolled in the course!");
-      setHasEnrolled(true);
-    } catch (err) {
-      console.error("Enrollment error:", err);
-      toast.error("Enrollment failed. Please try again.");
-    }
+    setShowPayment(true);
   };
 
   const handleResetLearning = async () => {
@@ -198,10 +184,16 @@ const SubjectDetail = ({ onOpenTrialModal, onOpenCounsellorModal }) => {
             <div className="flex gap-4 flex-wrap">
               <button
                 onClick={handleEnroll}
-                className="px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition duration-300 shadow-md hover:shadow-lg"
+                disabled={hasEnrolled}
+                className={`px-6 py-3 rounded-xl font-semibold transition duration-300 shadow-md ${
+                  hasEnrolled
+                    ? "bg-red-400 text-white cursor-not-allowed"
+                    : "bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg"
+                }`}
               >
-                Register to study
+                {hasEnrolled ? "Already Enrolled" : "Register to study"}
               </button>
+
               <button
                 onClick={onOpenCounsellorModal}
                 className="px-6 py-3 rounded-xl border border-blue-600 text-blue-600 font-semibold hover:bg-blue-50 transition duration-300 shadow-sm hover:shadow-md"
@@ -280,7 +272,13 @@ const SubjectDetail = ({ onOpenTrialModal, onOpenCounsellorModal }) => {
           </div>
         </div>
       </div>
-
+      <PaymentModal
+        isOpen={showPayment}
+        onClose={() => setShowPayment(false)}
+        subject={subject}
+        user={JSON.parse(localStorage.getItem("user"))}
+        onSuccess={() => setHasEnrolled(true)}
+      />
       <ToastContainer
         position="top-right"
         autoClose={2000}

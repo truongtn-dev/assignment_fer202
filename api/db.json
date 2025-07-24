@@ -26,6 +26,15 @@
       "role": "user",
       "status": "active",
       "id": 3
+    },
+    {
+      "name": "Truong Devs",
+      "email": "truongtn.dev@gmail.com",
+      "password": "345678",
+      "phone": "0973898830",
+      "role": "user",
+      "status": "active",
+      "id": 4
     }
   ],
   "calendar": [],
@@ -792,11 +801,7 @@
       "date": "2025-07-24",
       "price": 11200000,
       "progress": 0,
-      "completedLessons": [
-        1,
-        2,
-        3
-      ]
+      "completedLessons": []
     },
     {
       "id": 10,
@@ -813,6 +818,24 @@
       "price": 3700000,
       "date": "2025-07-24",
       "id": 11
+    },
+    {
+      "userId": "2",
+      "subjectId": "4",
+      "price": 3400000,
+      "date": "2025-07-24",
+      "progress": 0,
+      "completedLessons": [],
+      "id": 12
+    },
+    {
+      "userId": "2",
+      "subjectId": "2",
+      "price": 2400000,
+      "date": "2025-07-24",
+      "progress": 0,
+      "completedLessons": [],
+      "id": 13
     }
   ]
 }
