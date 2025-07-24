@@ -1,70 +1,178 @@
-# Getting Started with Create React App
+# 🎓 Group 5 EdTech Learning Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern EdTech platform built with **React.js**, **Tailwind CSS**, and **JSON Server** for students to explore, enroll, and track learning progress. Admins can manage courses, users, reviews, and schedules via a secure dashboard.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `yarn start`
+### 👩‍🎓 For Students
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Responsive landing page with scroll navigation  
+- Browse all available courses  
+- View course details with overview, curriculum, testimonials, and pricing  
+- Enroll in courses and track progress (My Courses)  
+- Submit reviews and star ratings  
+- Modal form booking for trial/counselor  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🛠️ For Admins
 
-### `yarn test`
+- Dashboard overview  
+- Manage courses (add/edit/delete)  
+- Manage users (filter, paginate, driver license upgrade)  
+- Manage ratings and reviews  
+- Calendar view of course schedules  
+- Route protection for admin-only pages  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `yarn build`
+## 🧱 Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Technology         | Usage                                |
+|--------------------|----------------------------------------|
+| React.js           | Frontend framework                     |
+| TailwindCSS        | Styling and layout                     |
+| React Router DOM   | Routing pages (public/admin)           |
+| Lucide-react       | Icon set for UI                        |
+| React Toastify     | Notification system (success/error)    |
+| React Icons        | Icons for extra decoration             |
+| React FullCalendar | Calendar view for admin                |
+| SweetAlert2        | Beautiful modals (confirm alerts)      |
+| React Datepicker   | Date filter in statistics              |
+| JSON Server        | Mock backend API with `db.json`        |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📁 Project Structure
 
-### `yarn eject`
+- `src/`
+  - `components/`
+    - Navbar.jsx, Footer.jsx, HeroSection.jsx, Curriculum.jsx, etc.
+    - SubjectsGrid.jsx, SubjectDetail.jsx, ModalForm.jsx, MyCourses.jsx
+    - `Admin/`
+      - AdminDashboard.jsx, AdminUsers.jsx, AdminSubjects.jsx
+      - AdminCalendar.jsx, AdminRatings.jsx, AdminReviews.jsx
+  - `App.js`
+  - `index.js`
+- `public/`
+  - logo.png, favicon, background images
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## ⚙️ Getting Started
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 1. Clone Project
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+git clone https://github.com/your-username/edtech-group5.git
+cd edtech-group5
+```
 
-## Learn More
+### 2. Install Dependencies
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 3. Start React Frontend
 
-### Code Splitting
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+➡️ App available at: [http://localhost:3000](http://localhost:3000)
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🗃️ Start JSON Server (Mock API)
 
-### Making a Progressive Web App
+### Install JSON Server globally
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+npm install -g json-server
+```
 
-### Advanced Configuration
+### Start the server
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+json-server --watch db.json --port 5000
+```
 
-### Deployment
+➡️ API available at: [http://localhost:5000](http://localhost:5000)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `yarn build` fails to minify
+## 🔐 Admin Login (Sample)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```json
+{
+  "email": "admin@example.com",
+  "password": "admin123",
+  "role": "admin"
+}
+```
+
+### Admin-only routes:
+
+- `/admin/dashboard`
+- `/admin/subjects`
+- `/admin/users`
+- `/admin/reviews`
+- `/admin/calendar`
+- `/admin/ratings`
+
+---
+
+## 🖥️ Splash Screen
+
+- Animated splash screen with SVG icon bounce  
+- Gradient glow + smooth text fade-in  
+- Auto dismiss after 3 seconds on load  
+
+---
+
+## 📊 Admin Dashboard Includes
+
+- Manage Subjects (add/edit/remove)  
+- Manage Users (filter, paginate, license upgrades)  
+- Manage Ratings & Reviews  
+- Calendar View of course schedules  
+- Course statistics and summaries (optional extensions)
+
+---
+
+## 📦 Deployment
+
+### ✅ Deploy with Vercel (Recommended)
+
+1. Push project to GitHub  
+2. Visit [https://vercel.com](https://vercel.com)  
+3. Import your GitHub repository  
+4. Set:
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `build`  
+5. Deploy and go live 🎉
+
+---
+
+## 📌 To-Do / Future Improvements
+
+- ✅ Custom splash intro with animation  
+- 🔒 JWT Authentication (replace `localStorage`)  
+- 📦 Replace JSON Server with Node.js/Express backend  
+- 💳 Stripe payment gateway integration  
+- 🔔 In-app notification and messaging system  
+- 🎓 Personalized learning paths & recommendations  
+- 📈 Dashboard analytics (e.g., Recharts, Chart.js)
+
+---
+
+## 👨‍💻 Credits
+
+Developed by **Group 5 – Advanced Web Development (2025)**
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**. See the [LICENSE](./LICENSE) file for details.
