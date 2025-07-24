@@ -39,27 +39,39 @@ const MyCourses = () => {
     fetchData();
   }, [fetchData]);
 
+  const uniqueCourses = useMemo(() => {
+    const map = new Map();
+    [...myCourses]
+      .sort((a, b) => new Date(b.date) - new Date(a.date)) // ưu tiên đăng ký mới nhất
+      .forEach((enroll) => {
+        if (!map.has(enroll.subjectId)) {
+          map.set(enroll.subjectId, enroll);
+        }
+      });
+    return Array.from(map.values());
+  }, [myCourses]);
+
   const calculateTotalPrice = useCallback(() => {
     const now = new Date();
-    let filtered = myCourses;
+    let filtered = uniqueCourses;
 
     if (filterType === "day") {
-      filtered = myCourses.filter(
+      filtered = uniqueCourses.filter(
         (e) => e.date === now.toISOString().slice(0, 10)
       );
     } else if (filterType === "month") {
       const currentMonth = now.toISOString().slice(0, 7);
-      filtered = myCourses.filter((e) => e.date.startsWith(currentMonth));
+      filtered = uniqueCourses.filter((e) => e.date.startsWith(currentMonth));
     } else if (filterType === "year") {
       const currentYear = now.getFullYear();
-      filtered = myCourses.filter((e) =>
+      filtered = uniqueCourses.filter((e) =>
         e.date.startsWith(currentYear.toString())
       );
     }
 
     const total = filtered.reduce((acc, item) => acc + (item.price || 0), 0);
     setTotalPrice(total);
-  }, [myCourses, filterType]);
+  }, [uniqueCourses, filterType]);
 
   useEffect(() => {
     calculateTotalPrice();
@@ -69,15 +81,15 @@ const MyCourses = () => {
     return allSubjects.find((s) => s.id.toString() === subjectId.toString());
   };
 
-  const totalPages = Math.ceil(myCourses.length / itemsPerPage);
-  const paginatedCourses = myCourses.slice(
+  const totalPages = Math.ceil(uniqueCourses.length / itemsPerPage);
+  const paginatedCourses = uniqueCourses.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
 
   const getLatestDate = () => {
-    if (myCourses.length === 0) return "-";
-    const sorted = [...myCourses].sort(
+    if (uniqueCourses.length === 0) return "-";
+    const sorted = [...uniqueCourses].sort(
       (a, b) => new Date(b.date) - new Date(a.date)
     );
     return sorted[0].date;
@@ -94,8 +106,11 @@ const MyCourses = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-6 pt-28 pb-20">
-      <div className="text-center mb-16">
+    <div className="relative max-w-7xl mx-auto px-6 pt-28 pb-20">
+      <div className="absolute -top-20 -left-20 w-72 h-72 bg-blue-300 opacity-20 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute top-1/2 -right-20 w-72 h-72 bg-teal-400 opacity-20 rounded-full blur-3xl animate-pulse"></div>
+
+      <div className="text-center mb-16 z-10 relative">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
           My{" "}
           <span className="bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
@@ -103,32 +118,31 @@ const MyCourses = () => {
           </span>
         </h2>
       </div>
-      {myCourses.length === 0 ? (
-        <p className="text-center text-gray-500">
+
+      {uniqueCourses.length === 0 ? (
+        <p className="text-center text-gray-500 z-10 relative">
           You have not enrolled in any courses.
         </p>
       ) : (
-        <div className="grid md:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-4 gap-6 z-10 relative">
           <div className="col-span-1 space-y-6">
             <div className="bg-white rounded-xl shadow p-5">
-              <h2 className="text-lg font-semibold mb-4">Overview</h2>
-              <p className="flex items-center gap-2 text-gray-700">
-                <FaBook className="text-blue-500" /> Total courses:{" "}
-                <span className="font-bold">{myCourses.length}</span>
+              <h2 className="text-lg font-semibold mb-6">Overview</h2>
+              <p className="flex items-center gap-3 text-gray-700 mb-3">
+                <FaBook className="text-blue-500" /> Total courses:
+                <span className="font-bold">{uniqueCourses.length}</span>
               </p>
-              <p className="flex items-center gap-2 text-gray-700">
-                <FaCalendarAlt className="text-purple-500" /> Latest:{" "}
+              <p className="flex items-center gap-3 text-gray-700 mb-3">
+                <FaCalendarAlt className="text-purple-500" /> Latest:
                 <span className="font-semibold">{getLatestDate()}</span>
               </p>
-              <p className="flex items-center gap-2 text-gray-700">
+              <p className="flex items-center gap-3 text-gray-700">
                 <FaMoneyBillWave className="text-green-500" /> Total cost:
                 <span className="text-red-600 font-bold">
-                  {" "}
                   {totalPrice.toLocaleString()}₫
                 </span>
               </p>
             </div>
-
             <div className="bg-white rounded-xl shadow p-5">
               <label className="text-gray-600 font-medium mb-2 block">
                 Filter by time
@@ -136,7 +150,7 @@ const MyCourses = () => {
               <select
                 value={filterType}
                 onChange={(e) => setFilterType(e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
+                className="w-full border border-gray-300 rounded-md px-3 py-3 text-sm"
               >
                 <option value="all">All</option>
                 <option value="day">Today</option>
@@ -148,7 +162,7 @@ const MyCourses = () => {
 
           <div className="col-span-3">
             <p className="mb-4 text-sm text-gray-500">
-              Showing {paginatedCourses.length} / {myCourses.length} courses
+              Showing {paginatedCourses.length} / {uniqueCourses.length} courses
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {paginatedCourses.map((enroll) => {
@@ -159,7 +173,7 @@ const MyCourses = () => {
                   <div
                     key={enroll.id}
                     onClick={() => handleClickSubject(subject.id)}
-                    className="cursor-pointer bg-white rounded-2xl shadow-md p-4 hover:shadow-lg transition"
+                    className="cursor-pointer bg-white rounded-2xl shadow-md p-4 hover:shadow-xl transition hover:scale-[1.02]"
                   >
                     <img
                       src={`/images/${subject.image}`}
@@ -230,6 +244,48 @@ const MyCourses = () => {
                 </button>
               </div>
             )}
+
+            {/* Progress Tracker */}
+            <div className="mt-16">
+              <h2 className="text-2xl font-bold mb-6 text-gray-800">
+                Progress Overview
+              </h2>
+              <div className="space-y-6">
+                {uniqueCourses.map((enroll) => {
+                  const subject = getSubjectInfo(enroll.subjectId);
+                  if (!subject || !subject.modules) return null;
+
+                  const totalLessons = subject.modules.length;
+                  const completedLessons = enroll.completedLessons?.length || 0;
+
+                  const progress =
+                    totalLessons > 0
+                      ? Math.round((completedLessons / totalLessons) * 100)
+                      : 0;
+
+                  return (
+                    <div
+                      key={enroll.id}
+                      onClick={() => handleClickSubject(subject.id)}
+                      className="cursor-pointer bg-white shadow rounded-xl p-5 space-y-2 hover:shadow-lg hover:scale-[1.01] transition"
+                    >
+                      <h3 className="font-semibold text-gray-800 text-lg">
+                        {subject.title}
+                      </h3>
+                      <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+                        <div
+                          className="bg-gradient-to-r from-green-400 to-green-600 h-full"
+                          style={{ width: `${progress}%` }}
+                        ></div>
+                      </div>
+                      <p className="text-sm text-gray-500">
+                        {progress}% completed
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       )}

@@ -7,6 +7,7 @@ import {
   BarChart,
   Star,
   LogOut,
+  Construction,
 } from "lucide-react";
 import AdminUsers from "./AdminUsers";
 import AdminSubjects from "./AdminSubjects";
@@ -59,8 +60,9 @@ const AdminDashboard = ({ user, onLogout }) => {
         return <AdminDashboardStatistics />;
       default:
         return (
-          <div className="text-gray-600 p-6 text-lg">
-            🚧 Tính năng đang phát triển...
+          <div className="text-gray-600 p-6 text-lg flex items-center">
+            <Construction size={24} className="text-yellow-500 mr-3" />
+            Feature in development...
           </div>
         );
     }

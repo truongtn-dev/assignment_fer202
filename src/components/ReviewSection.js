@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import axios from "axios";
 import { AiFillStar } from "react-icons/ai";
 import { toast } from "react-toastify";
@@ -7,6 +7,20 @@ const ReviewSection = ({ subjectId }) => {
   const [reviews, setReviews] = useState([]);
   const [form, setForm] = useState({ name: "", comment: "", rating: 5 });
   const [loading, setLoading] = useState(false);
+
+  const user = useMemo(() => {
+    try {
+      return JSON.parse(localStorage.getItem("user"));
+    } catch {
+      return null;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      setForm((prev) => ({ ...prev, name: user.fullName || user.name || "" }));
+    }
+  }, [user]);
 
   const fetchReviews = useCallback(async () => {
     try {
@@ -23,7 +37,7 @@ const ReviewSection = ({ subjectId }) => {
     fetchReviews();
   }, [fetchReviews]);
 
-  const updateSubjectRating = async (newReview) => {
+  const updateSubjectRating = async () => {
     try {
       const allReviews = (
         await axios.get(`http://localhost:5000/reviews?subjectId=${subjectId}`)
@@ -65,10 +79,9 @@ const ReviewSection = ({ subjectId }) => {
       await axios.post("http://localhost:5000/reviews", newReview);
 
       toast.success("Review submitted!");
-      setForm({ name: "", comment: "", rating: 5 });
+      setForm({ name: user?.fullName || "", comment: "", rating: 5 });
 
-      await updateSubjectRating(newReview);
-
+      await updateSubjectRating();
       fetchReviews();
     } catch (err) {
       toast.error("Error submitting review");
@@ -79,7 +92,9 @@ const ReviewSection = ({ subjectId }) => {
 
   return (
     <div className="mt-12 max-w-7xl mx-auto">
-      <h3 className="text-2xl font-bold mb-6 text-gray-900">Student Reviews</h3>
+      <h2 className="text-3xl font-bold text-gray-900 mb-6">
+        Student <span className="text-blue-600">Reviews</span>
+      </h2>
 
       {reviews.length === 0 ? (
         <p className="text-gray-500 italic mb-6">No reviews yet.</p>
@@ -107,64 +122,76 @@ const ReviewSection = ({ subjectId }) => {
         </ul>
       )}
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-6 bg-white p-6 rounded-xl shadow-md border"
-      >
-        <div>
-          <label className="block font-medium text-gray-700 mb-1">
-            Your Name
-          </label>
-          <input
-            type="text"
-            className="w-full border px-4 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block font-medium text-gray-700 mb-1">
-            Comment
-          </label>
-          <textarea
-            className="w-full border px-4 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-            rows={4}
-            value={form.comment}
-            onChange={(e) => setForm({ ...form, comment: e.target.value })}
-            required
-          ></textarea>
-        </div>
-
-        <div>
-          <label className="block font-medium text-gray-700 mb-1">Rating</label>
-          <div className="flex space-x-1">
-            {[1, 2, 3, 4, 5].map((value) => (
-              <button
-                key={value}
-                type="button"
-                onClick={() => setForm({ ...form, rating: value })}
-                className={`text-2xl transition transform hover:scale-110 ${
-                  value <= form.rating ? "text-yellow-400" : "text-gray-300"
-                }`}
-              >
-                <AiFillStar />
-              </button>
-            ))}
+      {user ? (
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-6 bg-white p-6 rounded-xl shadow-md border"
+        >
+          <div>
+            <label className="block font-medium text-gray-700 mb-1">
+              Your Name
+            </label>
+            <input
+              type="text"
+              className="w-full border px-4 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              required
+              disabled
+            />
           </div>
-        </div>
 
-        <div className="text-right">
-          <button
-            type="submit"
-            disabled={loading}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all disabled:opacity-50"
-          >
-            {loading ? "Submitting..." : "Submit Review"}
-          </button>
+          <div>
+            <label className="block font-medium text-gray-700 mb-1">
+              Comment
+            </label>
+            <textarea
+              className="w-full border px-4 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+              rows={4}
+              value={form.comment}
+              onChange={(e) => setForm({ ...form, comment: e.target.value })}
+              required
+            ></textarea>
+          </div>
+
+          <div>
+            <label className="block font-medium text-gray-700 mb-1">
+              Rating
+            </label>
+            <div className="flex space-x-1">
+              {[1, 2, 3, 4, 5].map((value) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => setForm({ ...form, rating: value })}
+                  className={`text-2xl transition transform hover:scale-110 ${
+                    value <= form.rating ? "text-yellow-400" : "text-gray-300"
+                  }`}
+                >
+                  <AiFillStar />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="text-right">
+            <button
+              type="submit"
+              disabled={loading}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all disabled:opacity-50"
+            >
+              {loading ? "Submitting..." : "Submit Review"}
+            </button>
+          </div>
+        </form>
+      ) : (
+        <div className="bg-yellow-50 border border-yellow-300 text-yellow-700 p-4 rounded-lg mt-4">
+          <p className="text-sm">
+            Please <span className="font-semibold">log in</span> to submit a
+            review.
+          </p>
         </div>
-      </form>
+      )}
     </div>
   );
 };

@@ -164,7 +164,7 @@ const AdminDashboardStatistics = () => {
   };
 
   return (
-    <div className="p-5 max-w-6xl mx-auto space-y-10 pb-20">
+    <div className="p-5 max-w-6xl mx-auto">
       <button
         onClick={handleBackToHome}
         className="mb-10 inline-flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium"
@@ -181,152 +181,153 @@ const AdminDashboardStatistics = () => {
           </span>
         </h2>
       </div>
+      <div className="p-5 max-w-6xl mx-auto space-y-10 pb-20">
+        <div className="flex justify-end items-center mb-4">
+          <button
+            onClick={exportToExcel}
+            className="bg-green-500 text-white px-4 py-2 rounded mr-2 hover:bg-green-600 transition"
+          >
+            Export Excel
+          </button>
+          <button
+            onClick={exportToPDF}
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+          >
+            Export PDF
+          </button>
+        </div>
 
-      <div className="flex justify-end items-center mb-4">
-        <button
-          onClick={exportToExcel}
-          className="bg-green-500 text-white px-4 py-2 rounded mr-2 hover:bg-green-600 transition"
-        >
-          Export Excel
-        </button>
-        <button
-          onClick={exportToPDF}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
-        >
-          Export PDF
-        </button>
-      </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <StatCard
+            icon={<FaBook />}
+            label="Total Courses"
+            value={totalCourses}
+            color="text-blue-600"
+          />
+          <StatCard
+            icon={<FaStar />}
+            label="Total Reviews"
+            value={totalReviews}
+            color="text-yellow-600"
+          />
+          <StatCard
+            icon={<FaMoneyBillWave />}
+            label="Total Revenue"
+            value={`${totalRevenue.toLocaleString("vi-VN")}đ`}
+            color="text-red-600"
+          />
+          <StatCard
+            icon={<FaUserGraduate />}
+            label="Total Enrollments"
+            value={totalEnrollments}
+            color="text-indigo-600"
+          />
+          <StatCard
+            icon={<FaBook />}
+            label="Free Courses"
+            value={freeCourses}
+            color="text-purple-600"
+          />
+          <StatCard
+            icon={<FaStar />}
+            label="High Rated Courses (>4.5)"
+            value={highRatedCourses}
+            color="text-yellow-600"
+          />
+          <StatCard
+            icon={<FaUserGraduate />}
+            label="Avg Students/Course"
+            value={avgStudentsPerCourse}
+            color="text-green-600"
+          />
+        </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-        <StatCard
-          icon={<FaBook />}
-          label="Total Courses"
-          value={totalCourses}
-          color="text-blue-600"
-        />
-        <StatCard
-          icon={<FaStar />}
-          label="Total Reviews"
-          value={totalReviews}
-          color="text-yellow-600"
-        />
-        <StatCard
-          icon={<FaMoneyBillWave />}
-          label="Total Revenue"
-          value={`${totalRevenue.toLocaleString("vi-VN")}đ`}
-          color="text-red-600"
-        />
-        <StatCard
-          icon={<FaUserGraduate />}
-          label="Total Enrollments"
-          value={totalEnrollments}
-          color="text-indigo-600"
-        />
-        <StatCard
-          icon={<FaBook />}
-          label="Free Courses"
-          value={freeCourses}
-          color="text-purple-600"
-        />
-        <StatCard
-          icon={<FaStar />}
-          label="High Rated Courses (>4.5)"
-          value={highRatedCourses}
-          color="text-yellow-600"
-        />
-        <StatCard
-          icon={<FaUserGraduate />}
-          label="Avg Students/Course"
-          value={avgStudentsPerCourse}
-          color="text-green-600"
-        />
-      </div>
+        <ChartCard title="Top 5 Courses by Revenue">
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={topRevenueCourses}>
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip formatter={(v) => `${v.toLocaleString("vi-VN")}đ`} />
+              <Bar dataKey="revenue" fill="#8884d8" />
+            </BarChart>
+          </ResponsiveContainer>
+        </ChartCard>
 
-      <ChartCard title="Top 5 Courses by Revenue">
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={topRevenueCourses}>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip formatter={(v) => `${v.toLocaleString("vi-VN")}đ`} />
-            <Bar dataKey="revenue" fill="#8884d8" />
-          </BarChart>
-        </ResponsiveContainer>
-      </ChartCard>
+        <ChartCard title="Average Rating per Course">
+          <ResponsiveContainer width="100%" height={300}>
+            <RadarChart data={courseRatings}>
+              <PolarGrid />
+              <PolarAngleAxis dataKey="title" />
+              <PolarRadiusAxis angle={30} domain={[0, 5]} />
+              <Radar
+                dataKey="avgRating"
+                stroke="#8884d8"
+                fill="#8884d8"
+                fillOpacity={0.6}
+              />
+              <Tooltip />
+            </RadarChart>
+          </ResponsiveContainer>
+        </ChartCard>
 
-      <ChartCard title="Average Rating per Course">
-        <ResponsiveContainer width="100%" height={300}>
-          <RadarChart data={courseRatings}>
-            <PolarGrid />
-            <PolarAngleAxis dataKey="title" />
-            <PolarRadiusAxis angle={30} domain={[0, 5]} />
-            <Radar
-              dataKey="avgRating"
-              stroke="#8884d8"
-              fill="#8884d8"
-              fillOpacity={0.6}
-            />
-            <Tooltip />
-          </RadarChart>
-        </ResponsiveContainer>
-      </ChartCard>
+        <ChartCard title="Students Growth Over Time">
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={monthlyStudentsChart}>
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Line type="monotone" dataKey="value" stroke="#00C49F" />
+            </LineChart>
+          </ResponsiveContainer>
+        </ChartCard>
 
-      <ChartCard title="Students Growth Over Time">
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={monthlyStudentsChart}>
-            <XAxis dataKey="month" />
-            <YAxis />
-            <Tooltip />
-            <Line type="monotone" dataKey="value" stroke="#00C49F" />
-          </LineChart>
-        </ResponsiveContainer>
-      </ChartCard>
+        <ChartCard title="Revenue: This Month vs Last Month">
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie
+                data={revenueComparison}
+                dataKey="value"
+                nameKey="name"
+                outerRadius={100}
+                label
+              >
+                {revenueComparison.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+              <Legend />
+              <Tooltip formatter={(v) => `${v.toLocaleString("vi-VN")}đ`} />
+            </PieChart>
+          </ResponsiveContainer>
+        </ChartCard>
 
-      <ChartCard title="Revenue: This Month vs Last Month">
-        <ResponsiveContainer width="100%" height={300}>
-          <PieChart>
-            <Pie
-              data={revenueComparison}
-              dataKey="value"
-              nameKey="name"
-              outerRadius={100}
-              label
-            >
-              {revenueComparison.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
-              ))}
-            </Pie>
-            <Legend />
-            <Tooltip formatter={(v) => `${v.toLocaleString("vi-VN")}đ`} />
-          </PieChart>
-        </ResponsiveContainer>
-      </ChartCard>
-
-      {/* Enrollments Table */}
-      <div className="bg-white p-6 rounded-xl shadow">
-        <h2 className="text-lg font-semibold mb-4">Latest Enrollments</h2>
-        <table className="w-full text-left">
-          <thead>
-            <tr className="border-b">
-              <th className="p-2">Student</th>
-              <th className="p-2">Course</th>
-              <th className="p-2">Date</th>
-              <th className="p-2">Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {latestEnrollments.map((e, index) => (
-              <tr key={index} className="border-b hover:bg-gray-50">
-                <td className="p-2 font-medium text-gray-800">{e.student}</td>
-                <td className="p-2">{e.course}</td>
-                <td className="p-2">{e.date}</td>
-                <td className="p-2">{e.price}đ</td>
+        {/* Enrollments Table */}
+        <div className="bg-white p-6 rounded-xl shadow">
+          <h2 className="text-lg font-semibold mb-4">Latest Enrollments</h2>
+          <table className="w-full text-left">
+            <thead>
+              <tr className="border-b">
+                <th className="p-2">Student</th>
+                <th className="p-2">Course</th>
+                <th className="p-2">Date</th>
+                <th className="p-2">Price</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {latestEnrollments.map((e, index) => (
+                <tr key={index} className="border-b hover:bg-gray-50">
+                  <td className="p-2 font-medium text-gray-800">{e.student}</td>
+                  <td className="p-2">{e.course}</td>
+                  <td className="p-2">{e.date}</td>
+                  <td className="p-2">{e.price}đ</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

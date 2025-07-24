@@ -92,7 +92,7 @@ const AdminReviews = () => {
   };
 
   return (
-    <div className="p-5 max-w-6xl mx-auto space-y-10 pb-20">
+    <div className="p-5 max-w-6xl mx-auto">
       <button
         onClick={handleBackToHome}
         className="mb-10 inline-flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium transition duration-200"
@@ -103,9 +103,9 @@ const AdminReviews = () => {
 
       <div className="text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-          Dashboard{" "}
+          Comments{" "}
           <span className="bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
-            Statistics
+            & Reviews
           </span>
         </h2>
       </div>

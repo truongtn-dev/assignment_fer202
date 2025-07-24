@@ -151,7 +151,7 @@ const AdminCalendar = () => {
         eventClick={handleEventClick}
         height="auto"
       />
-      <ToastContainer position="top-center" autoClose={2000} />
+      <ToastContainer position="top-right" theme="colored" autoClose={2000} />
     </div>
   );
 };

@@ -308,13 +308,54 @@
       "message": "Test function",
       "type": "trial",
       "submittedAt": "2025-07-23T11:55:04.909Z"
+    },
+    {
+      "id": 2,
+      "name": "Truong Devs",
+      "email": "truongtn.dev@gmail.com",
+      "subject": "Mobile Development",
+      "timeSlot": "2:00 PM - 3:00 PM",
+      "phone": "0973898830",
+      "message": "bnm",
+      "type": "trial",
+      "submittedAt": "2025-07-24T02:41:24.735Z"
     }
   ],
   "subjects": [
     {
       "id": "1",
       "title": "Program Backend NodeJS Middle 2026",
-      "lessons": 60,
+      "lessons": 7,
+      "modules": [
+        {
+          "lessonId": 1,
+          "title": "Introduction to Node.js & NPM"
+        },
+        {
+          "lessonId": 2,
+          "title": "Environment Setup & Tools"
+        },
+        {
+          "lessonId": 3,
+          "title": "Express Router and Middleware"
+        },
+        {
+          "lessonId": 4,
+          "title": "Async/Await and Promises"
+        },
+        {
+          "lessonId": 5,
+          "title": "MongoDB Integration"
+        },
+        {
+          "lessonId": 6,
+          "title": "Building RESTful APIs"
+        },
+        {
+          "lessonId": 7,
+          "title": "cghjkmknu"
+        }
+      ],
       "students": 30,
       "startDate": "10/08/2025",
       "schedule": "Sunday",
@@ -332,6 +373,28 @@
       "id": "2",
       "title": "Databases and SQL for Beginners",
       "lessons": 24,
+      "modules": [
+        {
+          "lessonId": 1,
+          "title": "What is a Database?"
+        },
+        {
+          "lessonId": 2,
+          "title": "Basic SQL Syntax"
+        },
+        {
+          "lessonId": 3,
+          "title": "SELECT Queries"
+        },
+        {
+          "lessonId": 4,
+          "title": "Filtering and Sorting Data"
+        },
+        {
+          "lessonId": 5,
+          "title": "Joins and Relationships"
+        }
+      ],
       "students": 0,
       "startDate": "21/07/2025",
       "schedule": "Monday, Thursday, Saturday",
@@ -342,13 +405,39 @@
       "image": "database-sql.jpg",
       "discount": "-60%",
       "badge": "Discount -60%",
-      "rating": 3,
-      "reviews": 2
+      "rating": 3.7,
+      "reviews": 3
     },
     {
       "id": "3",
       "title": "Program Fullstack 2025",
       "lessons": 95,
+      "modules": [
+        {
+          "lessonId": 1,
+          "title": "HTML & CSS Fundamentals"
+        },
+        {
+          "lessonId": 2,
+          "title": "Responsive Design Principles"
+        },
+        {
+          "lessonId": 3,
+          "title": "JavaScript Basics"
+        },
+        {
+          "lessonId": 4,
+          "title": "Advanced JavaScript & ES6"
+        },
+        {
+          "lessonId": 5,
+          "title": "ReactJS Basics"
+        },
+        {
+          "lessonId": 6,
+          "title": "NodeJS and Express Backend"
+        }
+      ],
       "students": 32,
       "startDate": "26/06/2025",
       "schedule": "Tuesday, Thursday, Saturday",
@@ -367,6 +456,28 @@
       "title": "C++ From Basic To Advanced",
       "lessons": 0,
       "students": 0,
+      "modules": [
+        {
+          "lessonId": 1,
+          "title": "Introduction to C++"
+        },
+        {
+          "lessonId": 2,
+          "title": "Control Flow in C++"
+        },
+        {
+          "lessonId": 3,
+          "title": "Functions and Recursion"
+        },
+        {
+          "lessonId": 4,
+          "title": "Object-Oriented Programming"
+        },
+        {
+          "lessonId": 5,
+          "title": "STL and Templates"
+        }
+      ],
       "startDate": "05/08/2025",
       "schedule": "Monday, Wednesday",
       "time": "19h–21h",
@@ -383,6 +494,28 @@
       "id": "5",
       "title": "C++ Advanced",
       "lessons": 0,
+      "modules": [
+        {
+          "lessonId": 1,
+          "title": "Advanced OOP Concepts"
+        },
+        {
+          "lessonId": 2,
+          "title": "Memory Management"
+        },
+        {
+          "lessonId": 3,
+          "title": "File Handling"
+        },
+        {
+          "lessonId": 4,
+          "title": "Multithreading in C++"
+        },
+        {
+          "lessonId": 5,
+          "title": "Advanced STL Usage"
+        }
+      ],
       "students": 0,
       "startDate": "12/08/2025",
       "schedule": "Tuesday, Thursday",
@@ -398,6 +531,28 @@
       "id": "6",
       "title": "Data Structures and Algorithms",
       "lessons": 0,
+      "modules": [
+        {
+          "lessonId": 1,
+          "title": "Introduction to Data Structures"
+        },
+        {
+          "lessonId": 2,
+          "title": "Linked Lists & Trees"
+        },
+        {
+          "lessonId": 3,
+          "title": "Stacks and Queues"
+        },
+        {
+          "lessonId": 4,
+          "title": "Sorting Algorithms"
+        },
+        {
+          "lessonId": 5,
+          "title": "Search and Recursion"
+        }
+      ],
       "students": 0,
       "startDate": "20/08/2025",
       "schedule": "Tuesday, Thursday, Saturday",
@@ -413,6 +568,28 @@
       "id": "7",
       "title": "Basic Python Programming",
       "lessons": 30,
+      "modules": [
+        {
+          "lessonId": 1,
+          "title": "Python Introduction and Setup"
+        },
+        {
+          "lessonId": 2,
+          "title": "Variables and Data Types"
+        },
+        {
+          "lessonId": 3,
+          "title": "Conditional Statements"
+        },
+        {
+          "lessonId": 4,
+          "title": "Loops and Iterations"
+        },
+        {
+          "lessonId": 5,
+          "title": "Functions and Modules"
+        }
+      ],
       "students": 25,
       "startDate": "18/07/2025",
       "schedule": "Monday, Wednesday",
@@ -430,6 +607,28 @@
       "id": "8",
       "title": "Web Frontend with HTML/CSS/JS",
       "lessons": 40,
+      "modules": [
+        {
+          "lessonId": 1,
+          "title": "HTML Basics"
+        },
+        {
+          "lessonId": 2,
+          "title": "CSS Styling and Flexbox"
+        },
+        {
+          "lessonId": 3,
+          "title": "JavaScript Fundamentals"
+        },
+        {
+          "lessonId": 4,
+          "title": "DOM Manipulation"
+        },
+        {
+          "lessonId": 5,
+          "title": "Events and Interactions"
+        }
+      ],
       "students": 28,
       "startDate": "15/08/2025",
       "schedule": "Tuesday, Thursday, Saturday",
@@ -447,6 +646,28 @@
       "id": 9,
       "title": "Databases and SQL for Beginners",
       "lessons": 78,
+      "modules": [
+        {
+          "lessonId": 1,
+          "title": "Database Concepts Overview"
+        },
+        {
+          "lessonId": 2,
+          "title": "Relational Databases"
+        },
+        {
+          "lessonId": 3,
+          "title": "SQL Queries and CRUD"
+        },
+        {
+          "lessonId": 4,
+          "title": "Normalization & Joins"
+        },
+        {
+          "lessonId": 5,
+          "title": "Database Design Best Practices"
+        }
+      ],
       "students": 30,
       "startDate": "10/08/2025",
       "schedule": "Sunday",
@@ -517,57 +738,81 @@
       "subjectId": 9,
       "createdAt": "2025-07-23T13:49:05.559Z",
       "id": 8
+    },
+    {
+      "name": "uythrf",
+      "comment": "ỵmhtyrgbvrce",
+      "rating": 5,
+      "subjectId": "2",
+      "createdAt": "2025-07-24T06:06:16.398Z",
+      "id": 9
     }
   ],
   "enrollments": [
     {
-      "userId": "2",
-      "subjectId": "1",
-      "price": 11200000,
-      "date": "2025-07-23",
-      "id": 1
+      "id": 1,
+      "userId": 2,
+      "subjectId": 5,
+      "date": "2025-07-20",
+      "price": 1200000,
+      "progress": 0,
+      "completedLessons": []
     },
     {
-      "userId": "2",
-      "subjectId": "1",
-      "price": 11200000,
+      "id": 4,
+      "userId": 2,
+      "subjectId": 3,
       "date": "2025-07-23",
-      "id": 2
-    },
-    {
-      "userId": "2",
-      "subjectId": "2",
-      "price": 2400000,
-      "date": "2025-07-23",
-      "id": 3
-    },
-    {
-      "userId": "2",
-      "subjectId": "3",
       "price": 12800000,
+      "progress": 0,
+      "completedLessons": []
+    },
+    {
+      "id": 5,
+      "userId": 2,
+      "subjectId": 5,
       "date": "2025-07-23",
-      "id": 4
+      "price": 3700000,
+      "progress": 0,
+      "completedLessons": []
+    },
+    {
+      "id": 6,
+      "userId": 2,
+      "subjectId": 4,
+      "date": "2025-07-23",
+      "price": 3400000,
+      "progress": 0,
+      "completedLessons": []
+    },
+    {
+      "id": 9,
+      "userId": 2,
+      "subjectId": 1,
+      "date": "2025-07-24",
+      "price": 11200000,
+      "progress": 0,
+      "completedLessons": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": 10,
+      "userId": 2,
+      "subjectId": 4,
+      "date": "2025-07-24",
+      "price": 3400000,
+      "progress": 0,
+      "completedLessons": []
     },
     {
       "userId": "2",
       "subjectId": "5",
       "price": 3700000,
-      "date": "2025-07-23",
-      "id": 5
-    },
-    {
-      "userId": "2",
-      "subjectId": "4",
-      "price": 3400000,
-      "date": "2025-07-23",
-      "id": 6
-    },
-    {
-      "userId": "2",
-      "subjectId": "3",
-      "price": 12800000,
-      "date": "2025-07-23",
-      "id": 7
+      "date": "2025-07-24",
+      "id": 11
     }
   ]
 }

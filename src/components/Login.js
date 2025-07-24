@@ -77,7 +77,7 @@ const Login = ({ setUser }) => {
         </div>
       </form>
 
-      <ToastContainer position="top-center" theme="colored" />
+      <ToastContainer position="top-right" theme="colored" />
     </div>
   );
 };

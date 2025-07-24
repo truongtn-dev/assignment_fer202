@@ -1,11 +1,12 @@
+// AdminSubjects.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { confirmAlert } from "react-confirm-alert";
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { FaEdit, FaTrashAlt, FaTrash } from "react-icons/fa";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
 const AdminSubjects = () => {
@@ -24,11 +25,12 @@ const AdminSubjects = () => {
     image: "",
     discount: "",
     badge: "",
+    modules: [],
   });
+  const [newLessonTitle, setNewLessonTitle] = useState("");
   const [editId, setEditId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [subjectsPerPage] = useState(8);
-
   const navigate = useNavigate();
 
   const fetchSubjects = async () => {
@@ -49,51 +51,49 @@ const AdminSubjects = () => {
   };
 
   const handleEdit = (subject) => {
-    setForm(subject);
+    setForm({ ...subject, modules: subject.modules || [] });
     setEditId(subject.id);
   };
 
   const handleDelete = async (id) => {
     confirmAlert({
-      customUI: ({ onClose }) => {
-        return (
-          <div className="custom-popup">
-            <h2 className="text-lg font-semibold">Confirm Delete</h2>
-            <p>Are you sure you want to delete this course?</p>
-            <div className="mt-4">
-              <button
-                className="bg-red-500 text-white py-2 px-4 rounded-lg mr-4"
-                onClick={async () => {
-                  await axios.delete(`http://localhost:5000/subjects/${id}`);
-                  fetchSubjects();
-                  toast.success("Deleted successfully!");
-                  onClose();
-                }}
-              >
-                Delete
-              </button>
-              <button
-                className="bg-gray-500 text-white py-2 px-4 rounded-lg"
-                onClick={onClose}
-              >
-                Cancel
-              </button>
-            </div>
+      customUI: ({ onClose }) => (
+        <div className="custom-popup">
+          <h2 className="text-lg font-semibold">Confirm Delete</h2>
+          <p>Are you sure you want to delete this course?</p>
+          <div className="mt-4">
+            <button
+              className="bg-red-500 text-white py-2 px-4 rounded-lg mr-4"
+              onClick={async () => {
+                await axios.delete(`http://localhost:5000/subjects/${id}`);
+                fetchSubjects();
+                toast.success("Deleted successfully!");
+                onClose();
+              }}
+            >
+              Delete
+            </button>
+            <button
+              className="bg-gray-500 text-white py-2 px-4 rounded-lg"
+              onClick={onClose}
+            >
+              Cancel
+            </button>
           </div>
-        );
-      },
+        </div>
+      ),
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const payload = {
       ...form,
-      lessons: parseInt(form.lessons),
-      students: parseInt(form.students),
-      price: parseInt(form.price),
-      oldPrice: parseInt(form.oldPrice),
+      lessons: parseInt(form.lessons) || 0,
+      students: parseInt(form.students) || 0,
+      price: parseInt(form.price) || 0,
+      oldPrice: parseInt(form.oldPrice) || 0,
+      modules: form.modules || [],
     };
 
     if (editId) {
@@ -102,21 +102,7 @@ const AdminSubjects = () => {
         .then(() => {
           toast.success("Update successful!");
           setEditId(null);
-          setForm({
-            id: "",
-            title: "",
-            lessons: "",
-            students: "",
-            startDate: "",
-            schedule: "",
-            time: "",
-            team: "",
-            price: "",
-            oldPrice: "",
-            image: "",
-            discount: "",
-            badge: "",
-          });
+          resetForm();
           fetchSubjects();
         })
         .catch((err) => {
@@ -134,28 +120,61 @@ const AdminSubjects = () => {
         .post("http://localhost:5000/subjects", newPayload)
         .then(() => {
           toast.success("Added successfully!");
+          resetForm();
           fetchSubjects();
-          setForm({
-            id: "",
-            title: "",
-            lessons: "",
-            students: "",
-            startDate: "",
-            schedule: "",
-            time: "",
-            team: "",
-            price: "",
-            oldPrice: "",
-            image: "",
-            discount: "",
-            badge: "",
-          });
         })
         .catch((err) => {
           console.error(err);
-          toast.error("Added failed!");
+          toast.error("Add failed!");
         });
     }
+  };
+
+  const resetForm = () => {
+    setForm({
+      id: "",
+      title: "",
+      lessons: "",
+      students: "",
+      startDate: "",
+      schedule: "",
+      time: "",
+      team: "",
+      price: "",
+      oldPrice: "",
+      image: "",
+      discount: "",
+      badge: "",
+      modules: [],
+    });
+    setNewLessonTitle("");
+  };
+  const addLesson = () => {
+    if (!newLessonTitle.trim()) return;
+
+    const maxLessonId = form.modules.length
+      ? Math.max(...form.modules.map((l) => l.lessonId || 0))
+      : 0;
+
+    const newLesson = {
+      lessonId: maxLessonId + 1,
+      title: newLessonTitle.trim(),
+    };
+
+    setForm((prev) => ({
+      ...prev,
+      modules: [...prev.modules, newLesson],
+    }));
+
+    setNewLessonTitle("");
+  };
+
+  const deleteLesson = (lessonId) => {
+    const updated = form.modules.filter((l) => l.lessonId !== lessonId);
+    setForm((prev) => ({
+      ...prev,
+      modules: updated,
+    }));
   };
 
   const indexOfLastSubject = currentPage * subjectsPerPage;
@@ -166,18 +185,10 @@ const AdminSubjects = () => {
   );
   const totalPages = Math.ceil(subjects.length / subjectsPerPage);
 
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+  const handlePageChange = (page) => setCurrentPage(page);
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
-  const pageNumbers = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pageNumbers.push(i);
-  }
-
-  const handleBackToHome = () => {
-    navigate("/");
-  };
+  const handleBackToHome = () => navigate("/");
 
   return (
     <div className="p-5 max-w-6xl mx-auto">
@@ -191,13 +202,14 @@ const AdminSubjects = () => {
 
       <div className="text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-          Courses{" "}
+          Course{" "}
           <span className="bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
             Management
           </span>
         </h2>
       </div>
 
+      {/* FORM INPUT */}
       <div className="bg-white rounded-2xl shadow-lg p-6 mb-10">
         <form
           onSubmit={handleSubmit}
@@ -205,7 +217,7 @@ const AdminSubjects = () => {
         >
           {Object.keys(form).map(
             (field) =>
-              field !== "id" && (
+              !["id", "modules"].includes(field) && (
                 <input
                   key={field}
                   name={field}
@@ -222,6 +234,45 @@ const AdminSubjects = () => {
                 />
               )
           )}
+
+          <div className="col-span-2">
+            <label className="block font-semibold mb-2">Lessons:</label>
+            <div className="flex gap-2 mb-3">
+              <input
+                value={newLessonTitle}
+                onChange={(e) => setNewLessonTitle(e.target.value)}
+                placeholder="Lesson title"
+                className="border p-2 rounded w-full"
+              />
+              <button
+                type="button"
+                onClick={addLesson}
+                className="bg-blue-600 text-white px-4 py-2 rounded"
+              >
+                Add
+              </button>
+            </div>
+            <ul className="space-y-2">
+              {form.modules?.map((l, idx) => (
+                <li
+                  key={l.lessonId}
+                  className="flex justify-between items-center bg-gray-100 p-2 rounded"
+                >
+                  <span>
+                    {idx + 1}. {l.title}
+                  </span>
+                  <button
+                    onClick={() => deleteLesson(l.lessonId)}
+                    type="button"
+                    className="text-red-600"
+                  >
+                    <FaTrash />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <button
             type="submit"
             className="col-span-2 bg-gradient-to-r from-blue-600 to-teal-600 text-white p-2 rounded mt-4"
@@ -231,7 +282,8 @@ const AdminSubjects = () => {
         </form>
       </div>
 
-      <div className="text-center mb-16">
+      {/* TABLE */}
+      <div className="text-center mb-10">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
           Course{" "}
           <span className="bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
@@ -252,15 +304,10 @@ const AdminSubjects = () => {
           </thead>
           <tbody className="bg-white">
             {currentSubjects.map((subj, index) => (
-              <tr
-                key={subj.id}
-                className={`hover:bg-gray-50 transition ${
-                  index === currentSubjects.length - 1 ? "rounded-b-2xl" : ""
-                }`}
-              >
+              <tr key={subj.id} className="hover:bg-gray-50 transition">
                 <td className="p-4">{subj.id}</td>
                 <td className="p-4">{subj.title}</td>
-                <td className="p-4">{subj.lessons}</td>
+                <td className="p-4">{subj.modules?.length || subj.lessons}</td>
                 <td className="p-4">
                   <div className="flex space-x-2">
                     <button
@@ -285,6 +332,7 @@ const AdminSubjects = () => {
         </table>
       </div>
 
+      {/* PAGINATION */}
       <div className="flex justify-center items-center space-x-4 mt-6">
         <button
           onClick={() => handlePageChange(1)}
@@ -332,7 +380,6 @@ const AdminSubjects = () => {
           {">>"}
         </button>
       </div>
-
       <ToastContainer position="top-right" autoClose={5000} hideProgressBar />
     </div>
   );
